@@ -205,7 +205,8 @@ body {
   left: calc(2px + 50%);
 }
 
-.calendar-days div.curr-date {
+.calendar-days div.curr-date,
+.calendar-days div.curr-date:hover {
   background-color: var(--blue);
   color: var(--white);
   border-radius: 50%;
