@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Calendar</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="light">
+    <div class="calendar">
+        <div class="calendar-header">
+            <span class="month-picker" id="month-picker"></span>
+            <div class="year-picker">
+                <span class="year-change" id="prev-year">
+                    <pre>&#60;</pre>
+                </span>
+                <span id="year"></span>
+                <span class="year-change" id="next-year">
+                    <pre>&#62;</pre>
+                </span>
+            </div>
+        </div>
+        <div class="calendar-body">
+            <div class="calendar-week-day">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+            </div>
+            <div class="calendar-days">
+
+            </div>
+        </div>
+        <div class="calendar-footer">
+            <div class="toggle">
+                <span>Dark Mode</span>
+                <div class="dark-mode-switch">
+                    <div class="dark-mode-switch-ident"></div>
+                </div>
+            </div>
+        </div>
+        <div class="month-list"></div>
+    </div>
+    <div class="todo">
+        <div class="todo-container">
+            <h1 class="todo-title">Todo List</h1>
+            <div class="todo-header">
+                <div class="todo-date">
+                    <div class="todo-today">August 25</div>
+                    <div class="todo-calendar">
+                        <i class="ri-calendar-line"></i>
+                    </div>
+                </div>
+                <h2>Today</h2>
+                <div class="todo-week-day">
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                </div>
+                <div class="todo-days">
+                    <div>1</div>
+                    <div>2</div>
+                    <div>3</div>
+                    <div>4</div>
+                    <div>5</div>
+                    <div>6</div>
+                    <div>7</div>
+                </div>
+            </div>
+            <div class="todo-input">
+                <div><span class="pendingNumb">5</span> tasks</div>
+                <div class="todo-input-content">
+                    <input type="text" placeholder="Add your new todo">
+                    <button><i class="ri-add-line"></i></button>
+                </div>
+            </div>
+            <ul class="todo-list">
+                <li>
+                    <div class="check">
+                        <i class="ri-checkbox-blank-line"></i>
+                    </div>
+                    <div class="todo-list-new">coding</div>
+                    <div class="todo-list-button">
+                        <i class="ri-edit-line"></i>
+                        <i class="ri-mouse-line"></i>
+                        <i class="ri-delete-bin-line"></i>
+                    </div>
+                </li>
+            </ul>
+            <div class="todo-footer">
+                <button>Clear All</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="main.js"></script>
+</body>
+
+</html>

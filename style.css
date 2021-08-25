@@ -1,0 +1,474 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+
+:root {
+  --dark-body: #5c5350;
+  --dark-main: #3c3630;
+  --dark-second: #746c70;
+  --dark-hover: #a5aba0;
+  --dark-text: #e5dace;
+
+  --light-body: #eeede7;
+  --light-main: #e2ded0;
+  --light-second: #747474;
+  --light-hover: #e9e6e0;
+  --light-text: #4e4f50;
+
+  --blue: #738580;
+  --white: #fff;
+
+  --shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+  --font-family: "Ubuntu", sans-serif;
+}
+
+.dark {
+  --bg-body: var(--dark-body);
+  --bg-main: var(--dark-main);
+  --bg-second: var(--dark-second);
+  --color-hover: var(--dark-hover);
+  --color-txt: var(--dark-text);
+}
+
+.light {
+  --bg-body: var(--light-body);
+  --bg-main: var(--light-main);
+  --bg-second: var(--light-second);
+  --color-hover: var(--light-hover);
+  --color-txt: var(--light-text);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  /*height: 100vh;*/
+  display: grid;
+  place-items: center;
+  gap: 50px;
+  font-family: var(--font-family);
+  background-color: var(--bg-body);
+  margin: 50px 0;
+}
+
+.calendar {
+  height: max-content;
+  width: max-content;
+  background-color: var(--bg-main);
+  padding: 20px;
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.light .calendar {
+  box-shadow: var(--shadow);
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 600;
+  color: var(--color-txt);
+  padding: 10px;
+}
+
+.calendar-body {
+  padding: 10px;
+}
+
+.calendar-week-day {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  height: 50px;
+  font-weight: 600;
+}
+
+.calendar-week-day div {
+  display: grid;
+  place-items: center;
+  color: var(--bg-second);
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  color: var(--color-txt);
+}
+
+.calendar-days div {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  position: relative;
+  cursor: pointer;
+  border-radius: 50%;
+  animation: to-top 1s forwards;
+}
+
+@keyframes to-top {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.calendar-days div span {
+  position: absolute;
+}
+
+.calendar-days div.calendar-day-hover:hover {
+  background-color: var(--color-hover);
+  transition: all 0.2s ease-in-out;
+}
+
+.month-picker {
+  padding: 5px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.month-picker:hover {
+  background-color: var(--color-hover);
+}
+
+.year-picker {
+  display: flex;
+  align-items: center;
+}
+
+.year-change {
+  height: 40px;
+  width: 40px;
+  display: grid;
+  place-items: center;
+  margin: 0 10px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.year-change:hover {
+  background-color: var(--color-hover);
+}
+
+.calendar-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+}
+
+.toggle {
+  display: flex;
+}
+
+.toggle span {
+  color: var(--color-txt);
+  margin-right: 10px;
+}
+
+.dark-mode-switch {
+  width: 48px;
+  height: 25px;
+  background-color: var(--bg-second);
+  border-radius: 14px;
+  position: relative;
+  cursor: pointer;
+}
+
+.dark-mode-switch-ident {
+  width: 21px;
+  height: 21px;
+  background-color: var(--bg-main);
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: left 0.2s ease-in-out;
+}
+
+.dark .dark-mode-switch-ident {
+  top: 2px;
+  left: calc(2px + 50%);
+}
+
+.calendar-days div.curr-date {
+  background-color: var(--blue);
+  color: var(--white);
+  border-radius: 50%;
+}
+
+.calendar-days div.curr-date span {
+  display: none;
+}
+
+.month-list {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: var(--bg-main);
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  transform: scale(1.5);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.month-list.show {
+  transform: scale(1);
+  visibility: visible;
+  pointer-events: visible;
+  transition: all 0.2s ease-in-out;
+}
+
+.month-list div {
+  display: grid;
+  place-items: center;
+}
+
+.month-list div > div {
+  width: 100%;
+  padding: 5px 20px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  color: var(--color-txt);
+}
+
+.month-list div > div:hover {
+  background-color: var(--color-hover);
+}
+
+.todo {
+  width: max-content;
+  height: max-content;
+  padding: 30px;
+  background-color: var(--bg-main);
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.light .todo {
+  box-shadow: var(--shadow);
+}
+
+.todo-title {
+  color: var(--color-txt);
+  font-size: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+.todo-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3rem;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.todo-today {
+  font-size: 20px;
+  color: var(--bg-second);
+  font-weight: 400;
+}
+
+.todo-calendar {
+  font-size: 20px;
+  color: var(--color-txt);
+  cursor: pointer;
+}
+
+.todo-header h2 {
+  color: var(--color-txt);
+}
+
+.todo-week-day {
+  display: grid;
+  padding: 10px 10px 0 10px;
+  grid-template-columns: repeat(7, 1fr);
+  place-items: center;
+}
+
+.todo-week-day div {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  color: var(--bg-second);
+  font-weight: 600;
+}
+
+.todo-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 0 10px;
+}
+
+.todo-days div {
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  color: var(--bg-second);
+  cursor: pointer;
+}
+
+.todo-days div:hover {
+  border-bottom: 2px solid var(--blue);
+  padding: 1px;
+}
+
+.todo-input {
+  margin: 20px 0;
+}
+
+.todo-input div {
+  color: var(--color-txt);
+  font-size: 18px;
+}
+
+.todo-input-content {
+  display: flex;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.todo-input-content input {
+  width: 90%;
+  height: 30px;
+  border: none;
+  background-color: var(--color-hover);
+  padding: 5px 10px;
+  outline: none;
+  border-radius: 5px;
+  margin-right: 5px;
+  color: var(--color-txt);
+}
+
+.todo-input-content input::placeholder {
+  font-family: var(--font-family);
+  color: var(--color-txt);
+}
+
+.todo-input-content button {
+  width: 10%;
+  border: none;
+  background-color: var(--bg-second);
+  color: var(--color-hover);
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: transform 80ms ease-in-out;
+}
+
+.todo-input-content button:active {
+  transform: scale(0.95);
+}
+
+.todo-footer {
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 20px 10px 10px 10px;
+}
+
+.todo-footer button {
+  border: none;
+  background-color: var(--bg-second);
+  color: var(--color-hover);
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in-out;
+  cursor: pointer;
+}
+
+.todo-footer button:active {
+  transform: scale(0.95);
+}
+
+.todo-list {
+  width: 100%;
+}
+
+.todo-list li {
+  list-style: none;
+  height: 45px;
+  width: 100%;
+  line-height: 45px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.check {
+  width: 10%;
+  cursor: pointer;
+  color: var(--color-txt);
+  display: grid;
+}
+
+.todo-list-new {
+  width: 70%;
+  color: var(--color-txt);
+}
+
+.todo-list-time {
+  width: 20%;
+  color: var(--color-txt);
+}
+
+.todo-list-button {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  gap: 2px;
+  z-index: 2;
+  background-color: var(--blue);
+  position: absolute;
+  top: 0;
+  right: -120%;
+  transition: all 1s ease;
+}
+
+.todo-list-button i {
+  color: var(--color-hover);
+  cursor: pointer;
+  font-size: 18px;
+  padding: 0 10px;
+}
+
+.todo-list li:hover .todo-list-button {
+  right: 0;
+}
+
+.dark .todo-list-button i,
+.dark .todo-footer button,
+.dark .todo-input-content button {
+  color: var(--color-txt);
+}
