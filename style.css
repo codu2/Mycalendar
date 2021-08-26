@@ -15,6 +15,7 @@
 
   --blue: #738580;
   --white: #fff;
+  --beige: #a49393;
 
   --shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
@@ -135,6 +136,11 @@ body {
   transition: all 0.2s ease-in-out;
 }
 
+.dark .calendar-days div.calendar-day-hover:hover {
+  background-color: var(--white);
+  transition: all 0.2s ease-in-out;
+}
+
 .month-picker {
   padding: 5px 10px;
   border-radius: 10px;
@@ -212,8 +218,11 @@ body {
   border-radius: 50%;
 }
 
-.calendar-days div.curr-date span {
-  display: none;
+.dark .calendar-days div.curr-date,
+.dark .calendar-days div.curr-date:hover {
+  background-color: var(--beige);
+  color: var(--white);
+  border-radius: 50%;
 }
 
 .month-list {
@@ -337,7 +346,7 @@ body {
 }
 
 .todo-days div:hover {
-  border-bottom: 2px solid var(--blue);
+  border-bottom: 2px solid var(--color-txt);
   padding: 1px;
 }
 
@@ -345,18 +354,20 @@ body {
   margin: 20px 0;
 }
 
-.todo-input div {
+.todo-task {
   color: var(--color-txt);
   font-size: 18px;
+  width: 100%;
+  margin-top: 20px;
 }
 
-.todo-input-content {
+.todo-input {
   display: flex;
   width: 100%;
   margin-top: 15px;
 }
 
-.todo-input-content input {
+.todo-input input {
   width: 90%;
   height: 30px;
   border: none;
@@ -368,12 +379,12 @@ body {
   color: var(--color-txt);
 }
 
-.todo-input-content input::placeholder {
+.todo-input input::placeholder {
   font-family: var(--font-family);
   color: var(--color-txt);
 }
 
-.todo-input-content button {
+.todo-input button {
   width: 10%;
   border: none;
   background-color: var(--bg-second);
@@ -381,10 +392,12 @@ body {
   border-radius: 5px;
   cursor: pointer;
   font-size: 15px;
+  opacity: 0.6;
   transition: transform 80ms ease-in-out;
+  pointer-events: none;
 }
 
-.todo-input-content button:active {
+.todo-input button:active {
   transform: scale(0.95);
 }
 
@@ -407,14 +420,22 @@ body {
   text-transform: uppercase;
   transition: transform 80ms ease-in-out;
   cursor: pointer;
+  opacity: 0.6;
+  pointer-events: none;
 }
 
-.todo-footer button:active {
+.todo-footer button.active:active {
   transform: scale(0.95);
+}
+
+.todo-footer button.active {
+  opacity: 1;
 }
 
 .todo-list {
   width: 100%;
+  max-height: 250px;
+  overflow-y: auto;
 }
 
 .todo-list li {
@@ -425,51 +446,106 @@ body {
   display: flex;
   align-items: center;
   position: relative;
+  cursor: default;
+  overflow: hidden;
 }
 
-.check {
-  width: 10%;
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
   cursor: pointer;
+  outline: none;
+  --webkit-appearance: none;
+  --moz-appearance: none;
+  appearance: none;
+  background-color: var(--color-hover);
+  margin-right: 16px;
+  border-radius: 5px;
+}
+
+input[type="checkbox"]:checked {
+  background: var(--blue);
+}
+
+.label {
   color: var(--color-txt);
+}
+
+.todo-list .todo-list-icon {
   display: grid;
-}
-
-.todo-list-new {
-  width: 70%;
-  color: var(--color-txt);
-}
-
-.todo-list-time {
-  width: 20%;
-  color: var(--color-txt);
-}
-
-.todo-list-button {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   align-items: center;
-  gap: 2px;
-  z-index: 2;
-  background-color: var(--blue);
   position: absolute;
-  top: 0;
   right: -120%;
-  transition: all 1s ease;
+  transition: all 0.3s ease;
 }
 
-.todo-list-button i {
+.todo-list li span {
   color: var(--color-hover);
+  background-color: var(--blue);
+  padding: 0 10px;
   cursor: pointer;
   font-size: 18px;
-  padding: 0 10px;
 }
 
-.todo-list li:hover .todo-list-button {
+.todo-list li:hover .todo-list-icon {
   right: 0;
 }
 
 .dark .todo-list-button i,
 .dark .todo-footer button,
-.dark .todo-input-content button {
+.dark .todo-input-box button {
   color: var(--color-txt);
+}
+
+.dark .todo-input input,
+.dark input[type="checkbox"] {
+  background-color: var(--bg-second);
+}
+
+.dark input[type="checkbox"]:checked {
+  background-color: var(--beige);
+}
+
+.dark .todo-list li span {
+  color: var(--color-txt);
+  background-color: var(--beige);
+}
+
+.todo-days div.todo-day-click {
+  border-bottom: 2px solid var(--blue);
+}
+
+.dark .todo-days div.todo-day-click {
+  border-bottom: 2px solid var(--beige);
+}
+
+.todo-input button.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.todo-footer button {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/*Edit Task*/
+
+ul li input[type="text"] {
+  display: none;
+}
+
+ul li.editMode input[type="text"] {
+  display: block;
+  background-color: var(--color-hover);
+  border: 0.1rem solid rgba(0, 0, 0, 0.4);
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: var(--color-txt);
+  outline: none;
+}
+
+ul li.editMode label {
+  display: none;
 }
