@@ -109,7 +109,7 @@ for (let i = 0; i < 7; i++) {
 
     let todo_week = document.createElement('div');
     if (currDate.getDay() + i > 6) {
-    todo_week.innerHTML = `${month_today[i - 3]}`;
+    todo_week.innerHTML = `${month_today[currDate.getDay() + i - 7]}`;
     } else {
     todo_week.innerHTML = `${month_today[currDate.getDay() + i]}`;
     }
